@@ -17,8 +17,8 @@ const G float64 = 50
 const canvasHeight = 800
 const canvasWidth = 1200
 const numObjects int = 100
-const centerX float64 = float64(canvasWidth) / 2
-const centerY float64 = float64(canvasHeight) / 2
+const centerX float64 = 0 //float64(canvasWidth) / 2
+const centerY float64 = 0 //float64(canvasHeight) / 2
 const minDistance float64 = 100
 const maxDistance float64 = 150
 const minVelocity float64 = 10
@@ -26,7 +26,8 @@ const maxVelocity float64 = 15
 const minMass float64 = 10
 const maxMass float64 = 15
 const chanSize int = 100
-const areaFactor float64 = 2
+const areaFactor float64 = 4
+const scaling float64 = 1
 
 var myColor color.NRGBA = color.NRGBA{R: 255, G: 255, B: 255, A: 15}
 var myStrokeColor color.NRGBA = color.NRGBA{R: 255, G: 255, B: 255, A: 255}
@@ -62,7 +63,8 @@ func main() {
 		mass := object.mass
 		//radius := (math.Sqrt(mass) / math.Sqrt(22/7)) * areaFactor
 		expression := (mass * 3) / (4 * math.Pi)
-		radius := math.Pow(expression, 0.33) * areaFactor
+		//radius := math.Pow(expression, 0.33) * math.Sqrt(areaFactor)
+		radius := (math.Pow(expression, 0.33) * math.Sqrt(areaFactor)) / scaling
 		circleDiameter := radius * 2
 		circle.Resize(fyne.NewSize(float32(circleDiameter), float32(circleDiameter)))
 		circle.StrokeColor = myStrokeColor
@@ -164,13 +166,13 @@ func timeStepCounter(counter <-chan bool) {
 
 func animator(changes <-chan [numObjects][2]float32, circles []*canvas.Circle, counter chan<- bool) {
 	for {
-		//time.Sleep(time.Millisecond * 1)
 		newChange := <-changes
 		for i, val := range newChange {
-			x := val[0]
-			y := val[1]
+			x := val[0]/float32(scaling) + canvasWidth/2
+			y := val[1]/float32(scaling) + canvasHeight/2
 			circle := circles[i]
 			radius := (circle.Size().Width) / 2
+			//circle.Move(fyne.Position{X: x - radius, Y: y - radius})
 			circle.Move(fyne.Position{X: x - radius, Y: y - radius})
 		}
 		for _, circle := range circles {
