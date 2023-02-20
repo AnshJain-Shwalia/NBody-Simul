@@ -10,18 +10,10 @@ import (
 func main() {
 	//bodies contains the objects which are to be operated upon
 	bodies := random()
-	//bodies[len(bodies)-1] = Sun
-	//b1 := body{mass: 10000, positionVec: [2]float64{centerX, centerY}, velocityVec: [2]float64{float64(0), float64(0)}}
-	//posVector, velVector := randomPerpendicularUnitVectors()
-	//posVector[0] = (posVector[0] * 100) + centerX
-	//posVector[1] = (posVector[1] * 100) + centerY
-	//velVector[0] *= 10
-	//velVector[1] *= 10
-	//b2 := body{mass: 100, positionVec: posVector, velocityVec: velVector}
-	//bodies = [2]body{b1, b2}
-	pR(bodies)
+	bodies[len(bodies)-1] = Sun
+	//pR(bodies)
 	myApp := app.New()
-	myWindow := myApp.NewWindow("Circles")
+	myWindow := myApp.NewWindow("Simulation")
 	myContainer := container.NewWithoutLayout()
 	// circles holds the references to the circles which will later need to be updated
 	circles := make([]*canvas.Circle, numObjects)

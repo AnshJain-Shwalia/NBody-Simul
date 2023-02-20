@@ -4,29 +4,7 @@ import (
 	"fmt"
 	"math"
 	"math/rand"
-	"time"
 )
-
-func timeStepCounter(counter <-chan bool) {
-	beforeTime := time.Now()
-	count := 0
-	for {
-		var _ bool = <-counter
-		count += 1
-		if count%10 == 0 {
-			afterTime := time.Now()
-			timeSpan := afterTime.Sub(beforeTime).Nanoseconds()
-			var timeSpanSec float64 = float64(timeSpan) / 1e+9
-			var Second float64 = 1
-			var fps = 10 * (Second / timeSpanSec)
-			pR("fps -> ", fps)
-			timeRate := fps * timeStep
-			pR("timeRate->", timeRate)
-			count = 0
-			beforeTime = afterTime
-		}
-	}
-}
 
 //func intersectionCheck(b1 body, b2 body) bool {
 //
@@ -88,6 +66,13 @@ func randomFloat64(a float64, b float64, precision int) float64 {
 	answer := float64(result)/math.Pow10(precision) + offset
 	return answer
 
+}
+
+func min(a int, b int) int {
+	if a < b {
+		return a
+	}
+	return b
 }
 
 func pR(val ...interface{}) {
