@@ -3,7 +3,6 @@ package main
 import (
 	"math"
 	"sync"
-	"time"
 )
 
 // this changeGeneratorCon Uses concurrency(using goroutines).
@@ -11,7 +10,7 @@ func changeGeneratorCon(changes chan<- [numObjects][2]float32, bodies [numObject
 	for {
 		newChange := [numObjects][2]float32{}
 		acceleration := [numObjects][2]float64{}
-		before := time.Now()
+		//before := time.Now()
 		for i := 0; i < len(bodies); i++ {
 			b2 := bodies[i]
 			index := i
@@ -23,7 +22,7 @@ func changeGeneratorCon(changes chan<- [numObjects][2]float32, bodies [numObject
 			}
 			wg.Wait()
 		}
-		pR(time.Now().Sub(before).Microseconds())
+		//pR(time.Now().Sub(before).Microseconds())
 		for j := 0; j < len(bodies); j++ {
 			velChangeX := timeStep * acceleration[j][0]
 			velChangeY := timeStep * acceleration[j][1]
@@ -49,7 +48,7 @@ func changeGeneratorCon2(changes chan<- [numObjects][2]float32, bodies [numObjec
 	for {
 		newChange := [numObjects][2]float32{}
 		acceleration := [numObjects][2]float64{}
-		before := time.Now()
+		//before := time.Now()
 		for i := 0; i < len(bodies); i++ {
 			b2 := bodies[i]
 			index := i
@@ -66,7 +65,7 @@ func changeGeneratorCon2(changes chan<- [numObjects][2]float32, bodies [numObjec
 				l += 1
 			}
 		}
-		pR(time.Now().Sub(before).Microseconds())
+		//pR(time.Now().Sub(before).Microseconds())
 		for j := 0; j < len(bodies); j++ {
 			velChangeX := timeStep * acceleration[j][0]
 			velChangeY := timeStep * acceleration[j][1]
@@ -92,7 +91,7 @@ func changeGeneratorCon3(changes chan<- [numObjects][2]float32, bodies [numObjec
 	for {
 		newChange := [numObjects][2]float32{}
 		acceleration := [numObjects][2]float64{}
-		before := time.Now()
+		//before := time.Now()
 		for i := 0; i < len(bodies); i++ {
 			b2 := bodies[i]
 			done := make(chan bool, numObjects/runLength+1)
@@ -108,7 +107,8 @@ func changeGeneratorCon3(changes chan<- [numObjects][2]float32, bodies [numObjec
 				counter -= 1
 			}
 		}
-		pR(time.Now().Sub(before).Microseconds())
+
+		//pR(time.Now().Sub(before).Microseconds())
 		for j := 0; j < len(bodies); j++ {
 			velChangeX := timeStep * acceleration[j][0]
 			velChangeY := timeStep * acceleration[j][1]
@@ -177,7 +177,7 @@ func changeGenerator(changes chan<- [numObjects][2]float32, bodies [numObjects]b
 	for {
 		newChange := [numObjects][2]float32{}
 		acceleration := [numObjects][2]float64{}
-		before := time.Now()
+		//before := time.Now()
 		for i := 0; i < len(bodies); i++ {
 			b2 := bodies[i]
 			for j := 0; j < len(bodies); j++ {
@@ -187,7 +187,7 @@ func changeGenerator(changes chan<- [numObjects][2]float32, bodies [numObjects]b
 				acceleration[j][1] += aY
 			}
 		}
-		pR(time.Now().Sub(before).Microseconds())
+		//pR(time.Now().Sub(before).Microseconds())
 		for i := 0; i < len(bodies); i++ {
 			velChangeX := timeStep * acceleration[i][0]
 			velChangeY := timeStep * acceleration[i][1]

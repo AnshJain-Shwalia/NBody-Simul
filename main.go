@@ -10,7 +10,7 @@ import (
 func main() {
 	//bodies contains the objects which are to be operated upon
 	bodies := random()
-	bodies[len(bodies)-1] = Sun
+	//bodies[len(bodies)-1] = Sun
 	//pR(bodies)
 	myApp := app.New()
 	myWindow := myApp.NewWindow("Simulation")

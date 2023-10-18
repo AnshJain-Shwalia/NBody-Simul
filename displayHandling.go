@@ -59,11 +59,11 @@ func timeStepCounter(counter <-chan bool) {
 			var timeSpanSec float64 = float64(timeSpan) / 1e+9
 			var Second float64 = 1
 			var fps = 10 * (Second / timeSpanSec)
-			//pR("fps -> ", fps)
-			fps += 1
+			pR("fps -> ", fps)
+			//fps += 1
 			timeRate := fps * timeStep
-			timeRate += 1
-			//pR("timeRate->", timeRate)
+			//timeRate += 1
+			pR("timeRate->", timeRate)
 			count = 0
 			beforeTime = afterTime
 		}
