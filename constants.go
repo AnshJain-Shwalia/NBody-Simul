@@ -2,11 +2,11 @@ package main
 
 import "image/color"
 
-const timeStep float64 = 0.001
+const timeStep float64 = 0.0001
 const G float64 = 50
 const canvasHeight = 800
 const canvasWidth = 1200
-const numObjects int = 100
+const numObjects int = 20
 const centerX float64 = 0 //float64(canvasWidth) / 2
 const centerY float64 = 0 //float64(canvasHeight) / 2
 const minDistance float64 = 100
